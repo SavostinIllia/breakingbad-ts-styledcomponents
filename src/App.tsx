@@ -11,12 +11,13 @@ const AppWrapper = styled.section``;
 const CharacterGridWrapper = styled.section`
   max-width: 1240px;
   margin: 0 auto;
-  .characterGrid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-left: -50px;
-  }
+`;
+
+const CharacterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-left: -50px;
 `;
 
 const App: React.FC = () => {
@@ -24,24 +25,23 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    const url: string = `https://www.breakingbadapi.com/api/characters`;
+
     const fetchItems = async () => {
-      const result = await axios(
-        `https://www.breakingbadapi.com/api/characters`
-      );
+      const result = await axios(`${url}`);
       setItems(result.data);
       setIsLoading(false);
     };
     fetchItems();
   }, []);
-  console.log(items);
-  console.log(isLoading);
+
   return (
     <AppWrapper>
       <Header />
       <CharacterGridWrapper>
-        <div className="characterGrid">
+        <CharacterDiv>
           <CharacterGrid items={items} isLoading={isLoading} />
-        </div>
+        </CharacterDiv>
       </CharacterGridWrapper>
     </AppWrapper>
   );

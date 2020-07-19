@@ -37,14 +37,7 @@ const CharacterGrid: React.FC<CharacterGridProps> = ({ items, isLoading }) => {
       {items.map((item) => {
         return (
           <CharacterItemDiv key={item.char_id}>
-            <CharacterItem
-              charName={item.name}
-              charPortrayed={item.portrayed}
-              charNickname={item.nickname}
-              charBirthday={item.birthday}
-              charStatus={item.status}
-              charImg={item.img}
-            />
+            <CharacterItem charData={item} />
           </CharacterItemDiv>
         );
       })}

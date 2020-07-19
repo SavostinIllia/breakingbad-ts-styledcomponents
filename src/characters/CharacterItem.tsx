@@ -1,13 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { ICharacterData } from "../interfaces";
 
 interface CharacterItemProps {
-  charName: string;
-  charPortrayed: string;
-  charNickname: string;
-  charBirthday: string | number;
-  charStatus: string;
-  charImg: string;
+  charData: ICharacterData;
 }
 
 const CharImg = styled.img`
@@ -33,7 +29,7 @@ const CharTitle = styled.h1`
   margin-bottom: 10px;
 `;
 
-const CharDescr = styled.p`
+const CharDescr = styled.p<{ charStatus?: string }>`
   font-size: 18px;
   padding-bottom: 15px;
   color: ${({ charStatus }) => handleColorType(charStatus)};
@@ -45,16 +41,11 @@ const CharDescr = styled.p`
   }
 `;
 
-/**
- *
- * @param: color
- * @case : 'Alive'
- * @case : 'Deceased'
- * @case : 'Presumed dead'
- * @case : '?'
- */
+const StrongCharDecsr = styled.strong`
+  font-weight: bold;
+`;
 
-const handleColorType = (charStatus: string) => {
+const handleColorType = (charStatus?: string) => {
   switch (charStatus) {
     case "Alive":
       return "#00b894";
@@ -67,32 +58,25 @@ const handleColorType = (charStatus: string) => {
   }
 };
 
-const CharacterItem: React.FC<CharacterItemProps> = ({
-  charName,
-  charNickname,
-  charBirthday,
-  charPortrayed,
-  charStatus,
-  charImg,
-}) => {
+const CharacterItem: React.FC<CharacterItemProps> = ({ charData }) => {
   return (
     <>
-      <CharImg src={charImg} alt="" />
+      <CharImg src={charData.img} alt="" />
       <CharacterItemDescription>
-        <CharTitle>{charName}</CharTitle>
+        <CharTitle>{charData.name}</CharTitle>
         <hr />
         <CharDescr>
-          <strong>Name : </strong>
-          {charPortrayed}
+          <StrongCharDecsr>Name : </StrongCharDecsr>
+          {charData.portrayed}
         </CharDescr>
         <CharDescr>
-          <strong>Nickname :</strong> {charNickname}
+          <StrongCharDecsr>Nickname :</StrongCharDecsr> {charData.nickname}
         </CharDescr>
         <CharDescr>
-          <strong>Birthday :</strong> {charBirthday}
+          <StrongCharDecsr>Birthday :</StrongCharDecsr> {charData.birthday}
         </CharDescr>
-        <CharDescr charStatus={charStatus}>
-          <strong>Status : </strong> {charStatus}
+        <CharDescr charStatus={charData.status}>
+          <StrongCharDecsr>Status : </StrongCharDecsr> {charData.status}
         </CharDescr>
       </CharacterItemDescription>
     </>
