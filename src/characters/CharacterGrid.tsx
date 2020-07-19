@@ -1,24 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import CharacterItem from "./CharacterItem";
+import { ICharacterData } from "../interfaces";
 
 interface CharacterGridProps {
   isLoading: boolean;
-  items: any;
-}
-
-interface Item {
-  appearance: number[];
-  better_call_saul_appearance: any;
-  birthday: number | string;
-  category: string;
-  char_id: number;
-  img: string;
-  name: string;
-  nickname: string;
-  occupation: string[];
-  portrayed: string;
-  status: string;
+  items: ICharacterData[];
 }
 
 const CharacterItemDiv = styled.div`
@@ -42,12 +29,12 @@ const CharacterItemDiv = styled.div`
   }
 `;
 
-const CharacterGrid: React.FC<CharacterGridProps> = ({ isLoading, items }) => {
+const CharacterGrid: React.FC<CharacterGridProps> = ({ items, isLoading }) => {
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
     <>
-      {items.map((item: Item) => {
+      {items.map((item) => {
         return (
           <CharacterItemDiv key={item.char_id}>
             <CharacterItem
