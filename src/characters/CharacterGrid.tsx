@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CharacterItem from "./CharacterItem";
 import { ICharacterData } from "../interfaces";
-
+import Spinner from "../ui/Spinner";
 interface CharacterGridProps {
   isLoading: boolean;
   items: ICharacterData[];
@@ -31,7 +31,7 @@ const CharacterItemDiv = styled.div`
 
 const CharacterGrid: React.FC<CharacterGridProps> = ({ items, isLoading }) => {
   return isLoading ? (
-    <h1>Loading...</h1>
+    <Spinner />
   ) : (
     <>
       {items.map((item) => {

@@ -5,6 +5,7 @@ import Header from "./ui/Header";
 import CharacterGrid from "./characters/CharacterGrid";
 
 import { ICharacterData } from "./interfaces";
+import Search from "./ui/Search";
 
 const AppWrapper = styled.section``;
 
@@ -23,21 +24,22 @@ const CharacterDiv = styled.div`
 const App: React.FC = () => {
   const [items, setItems] = useState<ICharacterData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [query, setQuery] = useState<string>("");
   useEffect(() => {
     const url: string = `https://www.breakingbadapi.com/api/characters`;
 
     const fetchItems = async () => {
-      const result = await axios(`${url}`);
+      const result = await axios(`${url}?name=${query}`);
       setItems(result.data);
       setIsLoading(false);
     };
     fetchItems();
-  }, []);
+  }, [query]);
 
   return (
     <AppWrapper>
       <Header />
+      <Search getQuery={(q) => setQuery(q)} />
       <CharacterGridWrapper>
         <CharacterDiv>
           <CharacterGrid items={items} isLoading={isLoading} />
