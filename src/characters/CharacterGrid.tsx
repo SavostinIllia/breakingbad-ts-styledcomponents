@@ -16,6 +16,17 @@ const CharacterItemDiv = styled.div`
   position: relative;
   overflow: hidden;
   transition: 1s ease-in-out;
+  @media (max-width: 1100px) {
+    flex-basis: calc(32% - 50px);
+  }
+  @media (max-width: 830px) {
+    flex-basis: calc(45% - 50px);
+    max-width: 291px;
+  }
+  @media (max-width: 600px) {
+    flex-basis: calc(80% - 50px);
+    max-width: 277px;
+  }
 
   :hover {
     cursor: pointer;

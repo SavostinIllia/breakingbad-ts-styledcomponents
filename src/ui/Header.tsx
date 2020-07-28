@@ -7,10 +7,14 @@ const HeaderWrapper = styled.header`
   text-align: center;
 `;
 
+const HeaderImg = styled.img`
+  max-width: 100%;
+`;
+
 const Header: React.FC = () => {
   return (
     <HeaderWrapper>
-      <img src={logo} alt="" />
+      <HeaderImg src={logo} alt="" />
     </HeaderWrapper>
   );
 };
